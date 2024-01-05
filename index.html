@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,84 +9,88 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
+
 <body>
     <div class="box">
-        <h1 class="title">I'm in a box</h1>
+        <h1 class="title">Weather Dashboard</h1>
     </div>
     <div class="columns">
         <div class="column is-two-fifths">
-          First column
-        
-    <div class="tile is-ancestor">
-        <div class="tile">
-    <div class="tile is-parent">
-        <article class="tile is-child box">
-          <div class="content">
-            <p class="title">Tall column</p>
-            <p class="subtitle">With even more content</p>
-            <div class="content">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam semper diam at erat pulvinar, at pulvinar felis blandit. Vestibulum volutpat tellus diam, consequat gravida libero rhoncus ut. Morbi maximus, leo sit amet vehicula eleifend, nunc dui porta orci, quis semper odio felis ut quam.</p>
-              <p>Suspendisse varius ligula in molestie lacinia. Maecenas varius eget ligula a sagittis. Pellentesque interdum, nisl nec interdum maximus, augue diam porttitor lorem, et sollicitudin felis neque sit amet erat. Maecenas imperdiet felis nisi, fringilla luctus felis hendrerit sit amet. Aenean vitae gravida diam, finibus dignissim turpis. Sed eget varius ligula, at volutpat tortor.</p>
-              <p>Integer sollicitudin, tortor a mattis commodo, velit urna rhoncus erat, vitae congue lectus dolor consequat libero. Donec leo ligula, maximus et pellentesque sed, gravida a metus. Cras ullamcorper a nunc ac porta. Aliquam ut aliquet lacus, quis faucibus libero. Quisque non semper leo.</p>
-            </div>
-          </div>
-        </article>
-      </div>
-</div></div>
-</div>
-<div class="column">
-  Second column
 
-    <div class="tile is-ancestor">
-        <div class="tile is-parent">
-            <article class="tile is-child box">
-              
-                <p class="title">Tall column</p>
-                <p class="subtitle">With even more content</p>
-                <div class="content">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam semper diam at erat pulvinar, at pulvinar felis blandit. Vestibulum volutpat tellus diam, consequat gravida libero rhoncus ut. Morbi maximus, leo sit amet vehicula eleifend, nunc dui porta orci, quis semper odio felis ut quam.</p>
-                  
+            <!-- left hand column/section to search for weather -->
+            <div class="tile is-ancestor">
+                <div class="tile">
+                    <div class="tile is-parent">
+                        <article class="tile is-child box">
+                            <div class="content">
+                                <p class="title">Enter a city to look up:</p>
+                                <p class="subtitle"></p>
+                                <div class="content is-grouped">
+                                    <input id="city" class="input is-primary" type="text" placeholder="Primary input">
+                                    <p></p>
+                                    <button id="search" class="button is-primary">Search</button>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
                 </div>
-              
-            </article>
-          </div>
-          </div>
+            </div>
+        </div>
+        <div class="column">
+            
+            <!-- Right hand column. Main area with today's weather -->
+            <div class="tile is-ancestor">
+                <div class="tile is-parent">
+                    <article class="tile is-child box">
+                        <p id="cityText" class="title"></p>
+                        <p id="conditions" class="subtitle"></p>
+                        <div class="content">
+                            <p id="temp"></p>
+                            <p id="wind"></p>
+                            <p id="humidity"></p>
+                        </div>
+                    </article>
+                </div>
+            </div>
 
 
-        <div class="tile is-ancestor">
-        <div class="tile is-parent">
-          <article class="tile is-child box">
-            <p class="title">One</p>
-            <p class="subtitle">Subtitle</p>
-          </article>
+            <!-- Five day forecast section -->
+            <div class="tile is-ancestor">
+                <div class="tile is-parent">
+                    <article class="tile is-child box">
+                        <p class="title">One</p>
+                        <p class="subtitle">Subtitle</p>
+                    </article>
+                </div>
+                <div class="tile is-parent">
+                    <article class="tile is-child box">
+                        <p class="title">Two</p>
+                        <p class="subtitle">Subtitle</p>
+                    </article>
+                </div>
+                <div class="tile is-parent">
+                    <article class="tile is-child box">
+                        <p class="title">Three</p>
+                        <p class="subtitle">Subtitle</p>
+                    </article>
+                </div>
+                <div class="tile is-parent">
+                    <article class="tile is-child box">
+                        <p class="title">Four</p>
+                        <p class="subtitle">Subtitle</p>
+                    </article>
+                </div>
+                <div class="tile is-parent">
+                    <article class="tile is-child box">
+                        <p class="title">Five</p>
+                        <p class="subtitle">Subtitle</p>
+                    </article>
+                </div>
+            </div>
         </div>
-        <div class="tile is-parent">
-          <article class="tile is-child box">
-            <p class="title">Two</p>
-            <p class="subtitle">Subtitle</p>
-          </article>
-        </div>
-        <div class="tile is-parent">
-          <article class="tile is-child box">
-            <p class="title">Three</p>
-            <p class="subtitle">Subtitle</p>
-          </article>
-        </div>
-        <div class="tile is-parent">
-          <article class="tile is-child box">
-            <p class="title">Four</p>
-            <p class="subtitle">Subtitle</p>
-          </article>
-        </div>
-        <div class="tile is-parent">
-            <article class="tile is-child box">
-              <p class="title">Five</p>
-              <p class="subtitle">Subtitle</p>
-            </article>
-          </div>
-      </div>
-      </div>
-      </div>
-    
+    </div>
+
+    <script type="text/javascript" src="./assets/js/script.js"></script>
 </body>
+
 </html>
