@@ -14,32 +14,39 @@ var humidEl = document.querySelector("#humidity");
 
 // Reads city from local storage and returns array of weather info.
   // Returns an empty array ([]) if there aren't any items.
-//   function readSavedCitiesFromStorage() {
-//     var cities = localStorage.getItem('cities');
-//     if (cities) {
-//       cities = JSON.parse(cities);
-//     } else {
-//       cities = [];
-//     }
-//     return cities;
-//   }
+  function readSavedCitiesFromStorage() {
+    var cities = localStorage.getItem('cities');
+    if (cities) {
+      cities = JSON.parse(cities);
+    } else {
+      cities = [];
+    }
+    return cities;
+  }
 
   //Display city weather from local storage
-//   function displayCities(){
-//     var cities = readSavedCitiesFromStorage();
+  function displayCities(){
+    var cities = readSavedCitiesFromStorage();
     
-//     for(var i=0; i < cities.length; i++){
-//       var cities = cities[i];
-      
-//       var agendaText = $("#text-" + item.time);
-//       agendaText.text(item.agendaItem);
-//     }
+    for(var i=0; i < cities.length; i++){
+      var city = cities[i];
 
-//   }
+      var savedCity = document.querySelector("#savedCities");
+      var newInput = document.createElement("input");
+      newInput.className ="button is-fullwidth";
+      newInput.setAttribute("type", "submit");
+      newInput.setAttribute("value", city.name);
+      savedCity.appendChild(newInput);//'<input class="button" type="submit" value="'+ city.name +'">');
+      console.log("attempted to add button for "+ city.name);
+      
+    }
+
+  }
 
   //Save city weather to local storage
   function saveCityToStorage(city) {
     localStorage.setItem('cities', JSON.stringify(city));
+    displayCities();
   }
 
 
@@ -59,19 +66,29 @@ function getWeather(city){
         return response.json();
     })
     .then(function (data) {
-        cityEl.textContent = city;
-        conditionEl.textContent = data.weather[0].description;
-        tempEl.textContent = "Temperature: " + data.main.temp +"°F";
-        windEl.textContent = "Wind Speed: " + data.wind.speed + " MPH";
-        humidEl.textContent = "Humidity: " + data.main.humidity + " %";
+
+        var searchedCity = city;
+        var weatherCond = data.weather[0].description;
+        var temp = data.main.temp;
+        var wind = data.wind.speed;
+        var humid = data.main.humidity;
+
+        cityEl.textContent = searchedCity;
+        conditionEl.textContent = weatherCond;
+        tempEl.textContent = "Temperature: " + temp +"°F";
+        windEl.textContent = "Wind Speed: " + wind + " MPH";
+        humidEl.textContent = "Humidity: " + humid + " %";
 
         var newCity = {
-            name: city,
-            weather: conditionEl.value,
+            name: searchedCity,
+            weather: weatherCond,
+            temp: temp,
+            windSpeed: wind,
+            humidity: humid,
           }
       
           // add item to local storage
-          var cities = []; //readSavedCitiesFromStorage();
+          var cities = readSavedCitiesFromStorage();
           cities.push(newCity);
           saveCityToStorage(cities);
 
