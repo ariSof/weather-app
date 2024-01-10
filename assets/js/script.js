@@ -1,11 +1,13 @@
 //search button
 var lookupCity = document.querySelector("#city");
 var searchBtn = document.querySelector("#search");
+var savedCityEl = document.querySelector("#savedCities");
 var cityEl = document.querySelector("#cityText");
 var conditionEl = document.querySelector("#conditions");
 var tempEl = document.querySelector("#temp");
 var windEl = document.querySelector("#wind");
 var humidEl = document.querySelector("#humidity");
+var isSearched = true;
 
 //api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=cbe35da2a8da20b0bd3f0399cb1c3aba
 //https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API%20key}
@@ -13,8 +15,8 @@ var humidEl = document.querySelector("#humidity");
 //51.5073219,"lon": -0.1276474,
 
 // Reads city from local storage and returns array of weather info.
-  // Returns an empty array ([]) if there aren't any items.
-  function readSavedCitiesFromStorage() {
+// Returns an empty array ([]) if there aren't any items.
+function readSavedCitiesFromStorage() {
     var cities = localStorage.getItem('cities');
     if (cities) {
       cities = JSON.parse(cities);
@@ -22,36 +24,41 @@ var humidEl = document.querySelector("#humidity");
       cities = [];
     }
     return cities;
-  }
+}
 
-  //Display city weather from local storage
-  function displayCities(){
+//Display city weather from local storage
+function displayCities(){
     var cities = readSavedCitiesFromStorage();
+    savedCityEl.textContent = '';
     
     for(var i=0; i < cities.length; i++){
       var city = cities[i];
 
-      var savedCity = document.querySelector("#savedCities");
       var newInput = document.createElement("input");
       newInput.className ="button is-fullwidth";
       newInput.setAttribute("type", "submit");
       newInput.setAttribute("value", city.name);
-      savedCity.appendChild(newInput);//'<input class="button" type="submit" value="'+ city.name +'">');
+
+      
+      savedCityEl.appendChild(newInput);//'<input class="button" type="submit" value="'+ city.name +'">');
       console.log("attempted to add button for "+ city.name);
       
     }
 
-  }
+}
 
-  //Save city weather to local storage
-  function saveCityToStorage(city) {
+//Save city weather to local storage
+function saveCityToStorage(city) {
     localStorage.setItem('cities', JSON.stringify(city));
     displayCities();
-  }
+}
 
 
-function searchCity(){
-    var city = lookupCity.value;
+function searchCity(city){
+    if(isSearched){
+        city = lookupCity.value;
+    }
+    isSearched = true;
     getWeather(city);
 }
 
@@ -96,6 +103,16 @@ function getWeather(city){
     });
 }
 
+savedCityEl.addEventListener("click", function(event) {
+    event.preventDefault();
+    var element = event.target;
+  
+    if(element.matches("input")){
+      var cityValue = element.getAttribute("value");
+      isSearched = false;
+      searchCity(cityValue);
+    }
+  });
 
 
 searchBtn.addEventListener("click", searchCity);
