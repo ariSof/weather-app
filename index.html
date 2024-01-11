@@ -15,7 +15,7 @@
         <h1 class="title">Weather Dashboard</h1>
     </div>
     <div class="columns">
-        <div class="column is-two-fifths">
+        <div class="column is-one-third">
 
             <!-- left hand column/section to search for weather -->
             <div class="tile is-ancestor">
@@ -38,7 +38,7 @@
                 
             </div>
             <div class="tile is-ancestor">
-                <p id="savedCities"></p>
+                <div id="savedCities"></div>
             </div>
         </div>
         <div class="column">
@@ -47,7 +47,12 @@
             <div class="tile is-ancestor">
                 <div class="tile is-parent">
                     <article class="tile is-child box">
-                        <p id="cityText" class="title"></p>
+                        <div id="main-weather">
+                            <p id="cityText" class="title"></p> 
+                            <span class="icon is-large">
+                                <img id="main-icon">
+                            </span>
+                        </div>
                         <p id="conditions" class="subtitle"></p>
                         <div class="content">
                             <p id="temp"></p>
@@ -58,43 +63,71 @@
                 </div>
             </div>
 
-
+            <p class="title">5-Day Forecast:</p>
             <!-- Five day forecast section -->
             <div class="tile is-ancestor">
                 <div class="tile is-parent">
-                    <article class="tile is-child box">
-                        <p class="title">One</p>
-                        <p class="subtitle">Subtitle</p>
+                    <article id="forecast1" class="tile is-child box">
+                        <p id="date1" class="subtitle"></p>
+                        <span class="icon is-medium">
+                            <img id="icon1">
+                        </span>
+                        <p id="temp1" class=""></p>
+                        <p id="wind1" class=""></p>
+                        <p id="humid1" class=""></p>
                     </article>
                 </div>
                 <div class="tile is-parent">
-                    <article class="tile is-child box">
-                        <p class="title">Two</p>
-                        <p class="subtitle">Subtitle</p>
+                    <article id="forecast2" class="tile is-child box">
+                        <p id="date2" class="subtitle"></p>
+                        <span class="icon is-medium">
+                            <img id="icon2">
+                        </span>
+                        <p id="temp2" class=""></p>
+                        <p id="wind2" class=""></p>
+                        <p id="humid2" class=""></p>
                     </article>
                 </div>
                 <div class="tile is-parent">
-                    <article class="tile is-child box">
-                        <p class="title">Three</p>
-                        <p class="subtitle">Subtitle</p>
+                    <article id="forecast3" class="tile is-child box">
+                        <p id="date3" class="subtitle"></p>
+                        <span class="icon is-medium">
+                            <img id="icon3">
+                        </span>
+                        <p id="temp3" class=""></p>
+                        <p id="wind3" class=""></p>
+                        <p id="humid3" class=""></p>
                     </article>
                 </div>
                 <div class="tile is-parent">
-                    <article class="tile is-child box">
-                        <p class="title">Four</p>
-                        <p class="subtitle">Subtitle</p>
+                    <article id="forecast4" class="tile is-child box">
+                        <p id="date4" class="subtitle"></p>
+                        <span class="icon is-medium">
+                            <img id="icon4">
+                        </span>
+                        <p id="temp4" class=""></p>
+                        <p id="wind4" class=""></p>
+                        <p id="humid4" class=""></p>
                     </article>
                 </div>
                 <div class="tile is-parent">
-                    <article class="tile is-child box">
-                        <p class="title">Five</p>
-                        <p class="subtitle">Subtitle</p>
+                    <article id="forecast5" class="tile is-child box">
+                        <p id="date5" class="subtitle"></p>
+                        <span class="icon is-medium">
+                            <img id="icon5">
+                        </span>
+                        <p id="temp5" class=""></p>
+                        <p id="wind5" class=""></p>
+                        <p id="humid5" class=""></p>
                     </article>
                 </div>
             </div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+    integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+    crossorigin="anonymous"></script>
     <script type="text/javascript" src="./assets/js/script.js"></script>
 </body>
 
