@@ -13,11 +13,6 @@ var isSearched = false;
 var today = dayjs();
 var reformatDate = today.format('MM/DD/YYYY');
 
-//api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=cbe35da2a8da20b0bd3f0399cb1c3aba
-//https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API%20key}
-//http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
-//51.5073219,"lon": -0.1276474,
-
 // Reads city from local storage and returns array of weather info.
 // Returns an empty array ([]) if there aren't any items.
 function readSavedCitiesFromStorage() {
@@ -44,32 +39,26 @@ function displayCities(){
       newInput.setAttribute("value", city);
 
       
-      savedCityEl.appendChild(newInput);//'<input class="button" type="submit" value="'+ city.name +'">');
-      console.log("attempted to add button for "+ city);
+      savedCityEl.appendChild(newInput);
+      console.log("add button for "+ city);
       
     }
-
 }
 
 //Save city weather to local storage
 function saveCityToStorage(city) {
-    // var cInStorage = readSavedCitiesFromStorage();
-
-    // foreach(cInStorage.pop)
-
     localStorage.setItem('cities', JSON.stringify(city));
     displayCities();
 }
 
-
+//Checks if the city to search was entered into input element, and calls api to get the weather and the forecast
 function searchCity(city){
-  console.log(city);
     if(isSearched){
         city = lookupCity.value;
     }
     isSearched = true;
     getWeather(city);
-    getForecast(city); //coordinates[0], coordinates[1]);
+    getForecast(city); 
 }
 
 //function to call weather api
@@ -97,19 +86,12 @@ function getWeather(city){
         tempEl.textContent = "Temperature: " + temp +"°F";
         windEl.textContent = "Wind Speed: " + wind + " MPH";
         humidEl.textContent = "Humidity: " + humid + " %";
-
-        // var newCity = {
-        //     name: searchedCity,
-        //     weather: weatherCond,
-        //     temp: temp,
-        //     windSpeed: wind,
-        //     humidity: humid,
-        //   }
       
-          // add item to local storage
+          //get the cities saved from local storage
           var cities = readSavedCitiesFromStorage();
           var isNew = true;
 
+          //Check if the city being searched is new or already in search history
           for(var i=0; i<cities.length; i++){
 
             if(cities[i] == searchedCity){
@@ -117,22 +99,19 @@ function getWeather(city){
             }
           }
 
+          //if indeed new, add city to local storage
           if(isNew){
             cities.push(searchedCity);
             saveCityToStorage(cities);
-          }
-
-          // cities.push(newCity);
-          // saveCityToStorage(cities);
-        
+          }        
     });
 }
 
 function getForecast(city) {
   var url = "https://api.openweathermap.org/data/2.5/forecast?q="+ city +"&units=imperial&appid=cbe35da2a8da20b0bd3f0399cb1c3aba";
-//           https://api.openweathermap.org/data/2.5/forecast?q=tahoe&units=imperial&appid=cbe35da2a8da20b0bd3f0399cb1c3aba
+
   fetch(url, {
-  cache: 'reload',
+    cache: 'reload',
   })
   .then(function (response) {
       return response.json();
@@ -143,21 +122,16 @@ function getForecast(city) {
 
     for(var i=1; i<=5; i++) {
       
-      //today.format('MM/DD/YYYY');
       var displayDate = today.add(i, 'day');
-      //reformatDate.add(i, 'day');
       displayDate = displayDate.format('MM/DD/YYYY');
     
-      // var searchedCity = city;
       var forecastEl = document.getElementById("forecast1");
       var dateEl = document.querySelector("#date"+i);
       var iconEl = document.querySelector("#icon"+ i);
       var tempEl = document.querySelector("#temp"+ i);
       var windEl = document.querySelector("#wind"+ i);
       var humidEl = document.querySelector("#humid"+ i);
-      console.log(forecastEl);
-      console.log(iconEl);
-
+      
       var date = data.list[counter].dt_txt;
       console.log(date);
       var weatherIcon = data.list[counter].weather[0].icon;
@@ -168,19 +142,15 @@ function getForecast(city) {
       var wind = data.list[counter].wind.speed;
       var humid = data.list[counter].main.humidity;
 
-      // cityEl.textContent = searchedCity;
-      // conditionEl.textContent = weatherCond;
       dateEl.textContent = displayDate;
       tempEl.textContent = "Temperature: " + temp +"°F";
       windEl.textContent = "Wind Speed: " + wind + " MPH";
       humidEl.textContent = "Humidity: " + humid + " %";
 
+      //To get weather from API at same time every day
       counter = counter + 8;
 
-    
-      console.log(data);
-    }
-      
+    }      
   });  
 }
 
